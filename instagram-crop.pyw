@@ -1,3 +1,8 @@
+# This is so far the worst code I've ever written
+# but somehow it works.
+# If someone can help me cleaning this code — so much self. self. self,
+# I will highly appreciate.
+
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
