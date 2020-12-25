@@ -1,3 +1,5 @@
+#--imports-----------------------------------
+
 import os
 import sys
 import subprocess
@@ -7,18 +9,14 @@ import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
 from tkinter import messagebox
+from tkinter import ttk
+from tkinter import font
 
-# fix for high-dpi Windows systems. Exclude it from macOS builds.
-import ctypes
-try:
-    ctypes.windll.shcore.SetProcessDpiAwareness(2) # if Windows version >= 8.1
-except:
-    ctypes.windll.user32.SetProcessDPIAware() # if Windows version <= 8.0
-
+#--------------------------------------------
 
 if sys.platform == 'darwin':
-    s_pad = 4
-    m_pad = 6
+    s_pad = 1
+    m_pad = 4
     l_pad = 20
     slice_entry_w = 4
     crop_button_w = 12
@@ -26,11 +24,16 @@ if sys.platform == 'darwin':
 elif sys.platform == 'win32':
     s_pad = 6
     m_pad = 10
-    l_pad = 30
+    l_pad = 20
     slice_entry_w = 5
     crop_button_w = 15
-    normal_button_w = 20
-
+    normal_button_w = 14
+    # fix for high-dpi Windows systems. Exclude it from macOS builds.
+    import ctypes
+    try:
+        ctypes.windll.shcore.SetProcessDpiAwareness(2) # if Windows version >= 8.1
+    except:
+        ctypes.windll.user32.SetProcessDPIAware() # if Windows version <= 8.0
 
 class window_class:
     def __init__(self, master):
@@ -46,11 +49,12 @@ class window_class:
             scaling_factor = round(dpi / 96, 2)
 
         # size window
-        w_window = int(600 * scaling_factor)
-        h_window = int(340 * scaling_factor)
+        w_window = int(580 * scaling_factor)
+        h_window = int(300 * scaling_factor)
         # padding
-        w_window_p = int(40 * scaling_factor)
-        h_window_p = int(40 * scaling_factor)
+        w_window_p = int(30 * scaling_factor)
+        h_window_p_t = int(20 * scaling_factor)
+        h_window_p_b = int(30 * scaling_factor)
 
         # vars
         self.save_same_folder = tk.IntVar(value=1) # default save in the same folder
@@ -66,16 +70,16 @@ class window_class:
         self.master.geometry(f"{w_window}x{h_window}+{width_spawn}+{height_spawn}")
         self.master.resizable(False, False)
 
+        # frame inside window
         main_frame = tk.Frame(self.master)
-        main_frame.pack(padx=w_window_p, pady=h_window_p, fill='both', expand=True)
-
+        main_frame.pack(padx=w_window_p, pady=(h_window_p_t, h_window_p_b), fill='both', expand=True)
 
         self.place_info = tk.Label(main_frame,text="↓ Place your Instagram album/carousel here")
         self.place_info.grid(column=0, row=0, columnspan=2, sticky='w')
 
         ##### Select image
-        self.select_image_button = tk.Button(main_frame, text="Select Image", command=self.select_image, width=normal_button_w)
-        self.select_image_button.grid(column=0, row=1, padx=(0,m_pad), pady=m_pad, sticky="w")
+        self.select_image_button = tk.Button(main_frame, text="Select Image", command=self.select_image, width=normal_button_w, default="active")
+        self.select_image_button.grid(column=0, row=1, padx=(0,m_pad), pady=m_pad, sticky="nsw")
         self.image_location = tk.Entry(main_frame)
         self.image_location.grid(column=1, row=1, columnspan=2, padx=m_pad, pady=m_pad, sticky="nswe")
         self.image_location.configure(state='readonly')
@@ -90,6 +94,9 @@ class window_class:
         self.save_folder_entry = tk.Entry(main_frame)
         self.save_folder_entry.configure(state='readonly')
 
+        separator = ttk.Separator(main_frame, orient='horizontal')
+        separator.grid(column=0, columnspan=3, row=4, sticky="swe")
+
         ##### Width slices
         self.width_slices_frame = tk.Frame(main_frame)
         self.width_slices_frame.grid(column=0, columnspan=2, row=5, pady=(m_pad,0), sticky="nsw")
@@ -103,20 +110,18 @@ class window_class:
         self.width_slices_default = tk.Label(self.width_slices_frame,text="Default: 1080")
         self.width_slices_default.grid(column=1, row=1, columnspan=2, sticky='sw')
 
-
         ##### About and crop button
-        self.about_label = tk.Label(main_frame, text='About', fg="blue", cursor="hand2")
-        self.about_label.grid(column=1, row=5, sticky="se", padx=(0,m_pad))
+        small_font = font.Font(size=8)
+        self.about_button = tk.Button(main_frame, text="Say Hi!", command=self.crop, width=10, font=small_font)
+        self.about_button.grid(column=1, row=5, sticky="se", padx=(0,m_pad))
 
-        self.crop_button = tk.Button(main_frame, text="Crop", command=self.crop, width=crop_button_w)
+        self.crop_button = tk.Button(main_frame, text="→ Crop", command=self.crop, width=crop_button_w, default="active")
         self.crop_button.grid(column=2, row=5, sticky="se")
         self.crop_button.configure(state='disable')
-
 
         # No idea but this keeps things separated and expanded properly
         main_frame.columnconfigure(1, weight=1)
         main_frame.rowconfigure(4, weight=1)
-
 
     def display_save_folder(self):
         # if checkbox is checked
@@ -124,9 +129,8 @@ class window_class:
             self.save_folder_button.grid_forget()
             self.save_folder_entry.grid_forget()
         else: # if checkbox is unchecked                         
-            self.save_folder_button.grid(column=0, row=3, padx=(0,m_pad), pady=m_pad, sticky="w")
+            self.save_folder_button.grid(column=0, row=3, padx=(0,m_pad), pady=m_pad, sticky="nsw")
             self.save_folder_entry.grid(column=1, row=3, columnspan=2, padx=m_pad, pady=m_pad, sticky="nswe")
-
 
     # function to update text entries
     def entry_update(self, entry, directory):
@@ -135,7 +139,6 @@ class window_class:
         entry.insert(0, directory.replace('/', os.sep))
         entry.xview_moveto(1)
         entry.configure(state='readonly')
-
 
     def select_image(self):
         ftypes = [('Image Files', ['*.jpg', '*.png'])]
@@ -158,7 +161,6 @@ class window_class:
 
         self.crop_button.configure(state='active')
         return
-        
 
     def select_save_folder(self):
         save_folder_dialog = filedialog.askdirectory(title = "Select the Instagram album image to be cropped")
@@ -166,8 +168,6 @@ class window_class:
             return
         self.save_folder_custom = save_folder_dialog
         self.entry_update(self.save_folder_entry, self.save_folder_custom)
-
-        
 
     def crop(self):    
         self.crop_button.configure(state='disable', text="Cropping...")
@@ -177,7 +177,7 @@ class window_class:
             im = Image.open(self.image_to_crop)
         except:
             messagebox.showinfo(title="Error", message="Can't open the file")
-            self.crop_button.configure(state='enable', text="Crop")
+            self.crop_button.configure(state='active', text="Crop")
             return
 
         # calculate number of slices (float)
@@ -212,11 +212,11 @@ class window_class:
 
         self.crop_button.configure(state='active', text="Crop")
 
+        # open folder after cropping
         if sys.platform == 'darwin':
             subprocess.call(['open', '--', save_folder])
         elif sys.platform == 'win32':
             subprocess.call(['explorer', save_folder])
-
 
 root = tk.Tk()
 window_class(root)
