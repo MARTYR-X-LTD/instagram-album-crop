@@ -1,1 +1,3 @@
-# instagram-album-crop
+# Instagram Album Cropper
+
+
