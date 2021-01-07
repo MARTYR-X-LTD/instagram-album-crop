@@ -18,14 +18,6 @@ class MyWidget(QWidget):
     def __init__(self):
         QWidget.__init__(self)
 
-        # self.hello = ["Hallo Welt", "你好，世界", "Hei maailma",
-        #    "Hola Mundo", "Привет мир"]
-
-        # self.button = QPushButton("Click me!")
-        # self.text = QLabel("Hello World")
-        # self.text.setAlignment(Qt.AlignCenter)
-        # self.line_edit = QLineEdit()
-
         self.setWindowTitle("Instagram Album Cropper")
 
         # vars
@@ -34,37 +26,32 @@ class MyWidget(QWidget):
         self.filename = self.file_dir = self.save_folder_custom = None # Initial variables declare
         
 
-
+        # Set main vertical layout for window
         grid = QVBoxLayout()
-        #grid = QGridLayout()
-        #grid.setSpacing(10)
-        #grid.setVerticalSpacing(20)
         grid.setContentsMargins(24,24,24,24)
-
-        
-        
-        # spacer_bottom = QSpacerItem(1, 30, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
         button_size = (80, 24)
         entry_h = 24
 
+
+        # Select image layout
         select_image_l = QHBoxLayout()
+
         select_image_button = QPushButton("Select Image")
-        #select_image_button.setMinimumWidth(button_width)
         select_image_button.setMinimumSize(*button_size)
         select_image_button.clicked.connect(self.select_image)
+
         self.image_location = QLineEdit()
         self.image_location.setMinimumHeight(entry_h)
         self.image_location.setReadOnly(True)
 
-        #grid.addWidget(select_image_button, 0, 0)
-        #grid.addWidget(self.image_location, 0, 1)
         select_image_l.addWidget(select_image_button)
         select_image_l.addWidget(self.image_location)
         grid.addLayout(select_image_l)
 
-
-
+        
+        # Save folder layout
+        save_folder_l = QHBoxLayout()
+        
         save_folder_button = QPushButton("Folder to save")
         save_folder_button.setMinimumSize(*button_size)
         save_folder_button.clicked.connect(self.select_save_folder)
@@ -72,7 +59,6 @@ class MyWidget(QWidget):
         self.save_folder_entry.setMinimumHeight(entry_h)
         self.save_folder_entry.setReadOnly(True)
         
-        save_folder_l = QHBoxLayout()
         self.save_folder_check = QCheckBox("Save slices in the same folder of the image")
         self.save_folder_check.toggled.connect(save_folder_button.setDisabled)
         self.save_folder_check.toggled.connect(self.save_folder_entry.setDisabled)
@@ -89,7 +75,7 @@ class MyWidget(QWidget):
 
         
     
-
+        # Width of slices, crop, about
         bottom_l = QHBoxLayout()
 
         width_group = QGroupBox("Width of slices")
@@ -127,9 +113,6 @@ class MyWidget(QWidget):
         self.setLayout(grid)
 
 
-        # Connecting the signal
-        #self.button.clicked.connect(self.magic)
-
     @Slot()
     def magic(self):
         self.text.setText(random.choice(self.hello))
@@ -141,8 +124,7 @@ class MyWidget(QWidget):
         ftypes = "Image Files (*.jpg *.png)"
         image_dialog = QFileDialog.getOpenFileName(self, "Select the Instagram album image to be cropped", '', ftypes)
         # image_dialog is a tuple. First is file. Second is type of file.
-
-        print(image_dialog)
+        
         if not image_dialog[0]:
             return
         
@@ -232,7 +214,6 @@ if __name__ == "__main__":
 
     widget = MyWidget()
     widget.setFixedSize(500, 0)
-    #widget.resize(500, QSizePolicy.Minimum)
     widget.show()
 
     sys.exit(app.exec_())
