@@ -59,9 +59,8 @@ coll = COLLECT(exe,
                a.datas,
                strip=False,
                upx=True,
-               upx_exclude=[],
                name='Instagram Album Cropper')
 app = BUNDLE(coll,
              name='Instagram Album Cropper.app',
-             icon=None,
+             icon='icons/icon.icns',
              bundle_identifier=None)
