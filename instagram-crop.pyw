@@ -4,6 +4,7 @@ import os
 import subprocess
 import webbrowser
 import threading
+import multiprocessing as mp
 from PySide2.QtWidgets import (QApplication, QLabel, QPushButton, QCheckBox, QSpacerItem, QFormLayout, QVBoxLayout,
                                QHBoxLayout, QWidget, QLineEdit, QGridLayout, QSizePolicy, QGroupBox, QFileDialog,
                                QMessageBox)
@@ -13,7 +14,6 @@ from PySide2.QtGui import QIntValidator, QIcon
 from PIL import Image
 #os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 #os.environ["QT_SCALE_FACTOR"] = "1.5"
-
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -25,6 +25,17 @@ def resource_path(relative_path):
 
     return os.path.join(base_path, relative_path)
 
+
+def crop_process(i, im, top, bottom, width_slices, width_im, save_folder, filename, extension):
+    left = i * width_slices
+    right = (i+1) * width_slices
+
+    # for images that are not multiple of the slice width.
+    if right > width_im:
+        right = width_im
+
+    temp_crop = im.crop((left, top, right, bottom))
+    temp_crop.save(f'{save_folder}{os.sep}{filename}_crop_ig-{str(i+1)}{extension}', quality=100, subsampling=0)
 
 class CropSignals(QObject):
     crop_started = Signal()
@@ -234,16 +245,16 @@ class MainWidget(QWidget):
         top = 0
         bottom = height_im
 
-        for i in range(int(number_slices)):
-            left = i * width_slices
-            right = (i+1) * width_slices
 
-            # for images that are not multiple of the slice width.
-            if right > width_im:
-                right = width_im
+        pool = mp.Pool()
 
-            temp_crop = im.crop((left, top, right, bottom))
-            temp_crop.save(f'{save_folder}{os.sep}{self.filename}_crop_ig-{str(i+1)}{self.extension}', quality=100, subsampling=0)
+        crops = [pool.apply_async(crop_process, (i, im, top, bottom, width_slices, width_im, save_folder, self.filename, self.extension,)) for i in range(int(number_slices))]
+
+        for r in crops:
+            r.wait()
+
+        pool.close()
+        pool.join()
 
         self._CropSignals.crop_finished.emit()
 
