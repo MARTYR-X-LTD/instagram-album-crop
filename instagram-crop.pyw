@@ -72,9 +72,9 @@ class MainWidget(QWidget):
 
         else:
             grid.setContentsMargins(24,24,24,24)
-            button_size = (100, 24)
-            entry_h = 24
-            bottom_button_size = (65, 24)
+            button_size = (110, 28)
+            entry_h = 28
+            bottom_button_size = (65, 28)
             slices_entry_width = 32
             spacer_same_folder = (0, 6)
             spacer_bottom = (0, 20)
@@ -291,7 +291,7 @@ if __name__ == "__main__": # to avoid new window with a new process in multiproc
     if sys.platform == 'darwin':
         widget.setFixedSize(600, 0)
     else:
-        widget.setFixedSize(500, 0)
+        widget.setFixedSize(540, 0)
 
     widget.show()
 
