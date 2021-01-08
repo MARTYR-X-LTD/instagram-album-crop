@@ -281,10 +281,12 @@ class MainWidget(QWidget):
             subprocess.call(['explorer', save_folder])
 
 if __name__ == "__main__": # to avoid new window with a new process in multiprocessing
+    mp.freeze_support() # support multiprocessing in pyinstaller
+    mp.set_start_method('spawn') # macos fix for multiple instances in dock
+    
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
     app = QApplication(sys.argv)
 
-    mp.freeze_support() # support multiprocessing in pyinstaller
 
     widget = MainWidget()
 
