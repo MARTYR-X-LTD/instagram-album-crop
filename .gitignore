@@ -1,4 +1,17 @@
-.vscode/
-env/
+# IDEs
+/.vscode/
+
+# pyenv
+/env/
 act.bat
+
+# git
 .git/
+
+# testing images
+/example/
+
+# Pyinstaller
+/build/
+/dist/
+/__pycache__/
