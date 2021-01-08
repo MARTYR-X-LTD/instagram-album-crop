@@ -53,15 +53,31 @@ class MainWidget(QWidget):
         #self.save_same_folder = tk.IntVar(value=1) # default save in the same folder
         #self.width_slices = 1080 # 1080px is the default max width for slices in Instagram
         self.filename = self.extension = self.file_dir = self.save_folder_custom = None # Initial variables declare
-        
+       
 
         # Set main vertical layout for window
         grid = QVBoxLayout()
-        grid.setContentsMargins(24,24,24,24)
-        button_size = (100, 24)
-        bottom_button_size = (65, 24)
-        entry_h = 24
 
+        # set GUI sizes for platform specific. Windows and Linux shared
+        if sys.platform == 'darwin':
+            grid.setContentsMargins(20,20,20,20)
+            button_size = (100, 40)
+            entry_h = 31
+            bottom_button_size = (80, 40)
+            slices_entry_width = 37
+            spacer_same_folder = (0, 2)
+            spacer_bottom = (0, 6)
+
+            grid.setSpacing(10)
+
+        else:
+            grid.setContentsMargins(24,24,24,24)
+            button_size = (100, 24)
+            entry_h = 24
+            bottom_button_size = (65, 24)
+            slices_entry_width = 32
+            spacer_same_folder = (0, 6)
+            spacer_bottom = (0, 20)
 
         # Select image layout
         select_image_l = QHBoxLayout()
@@ -94,14 +110,14 @@ class MainWidget(QWidget):
         self.save_folder_check.toggled.connect(self.save_folder_entry.setDisabled)
         self.save_folder_check.setChecked(True)
 
-        grid.addSpacerItem(QSpacerItem(0, 6))
+        grid.addSpacerItem(QSpacerItem(*spacer_same_folder))
 
         grid.addWidget(self.save_folder_check)
         save_folder_l.addWidget(save_folder_button)
         save_folder_l.addWidget(self.save_folder_entry)
         grid.addLayout(save_folder_l)
 
-        grid.addSpacerItem(QSpacerItem(0, 20))
+        grid.addSpacerItem(QSpacerItem(*spacer_bottom))
 
         
     
@@ -111,7 +127,7 @@ class MainWidget(QWidget):
         width_group = QGroupBox("Width of slices")
         width_group_layout = QHBoxLayout()
         self.width_slices_entry = QLineEdit("1080")
-        self.width_slices_entry.setFixedWidth(32)
+        self.width_slices_entry.setFixedWidth(slices_entry_width)
         width_slices_px = QLabel("px")
         width_slices_default = QLabel("Default: 1080px")
         width_slices_default.setDisabled(True)
@@ -129,7 +145,7 @@ class MainWidget(QWidget):
         self.width_slices_entry.setValidator(validator)
         
         about_button = QPushButton("🔗 Hello!")
-        about_button.setMaximumSize(*bottom_button_size)
+        about_button.setMinimumSize(*bottom_button_size)
         about_button.clicked.connect(lambda: webbrowser.open('https://under.martyr.shop/instagram-album-crop'))
 
 
@@ -271,7 +287,12 @@ if __name__ == "__main__": # to avoid new window with a new process in multiproc
     mp.freeze_support() # support multiprocessing in pyinstaller
 
     widget = MainWidget()
-    widget.setFixedSize(500, 0)
+
+    if sys.platform == 'darwin':
+        widget.setFixedSize(600, 0)
+    else:
+        widget.setFixedSize(500, 0)
+
     widget.show()
 
     sys.exit(app.exec_())

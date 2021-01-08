@@ -18,8 +18,8 @@ remove_binaries = [
 				'qpdf', 'qtga', 'qgif', 'qsvg', 
 				'd3dcompiler', 'libGLES', 'libEGL', 'opengl32sw', 
 				'Qt5Pdf', 'Qt5Virtual', 'Qt5DBus', 'Qt5Quick', 
-				'Qt5Svg', 'Qt5WebSockets', 'QtNetwork.pyd', 'qjpeg.dll', 
-				'qtiff.dll', 'qwebp.dll', 'qwebgl.dll'
+				'Qt5Svg', 'Qt5WebSockets', 'QtNetwork.pyd', 'qjpeg', 
+				'qtiff', 'qwebp', 'qwebgl'
 				]
 
 remove_datas = ['qtbase']
