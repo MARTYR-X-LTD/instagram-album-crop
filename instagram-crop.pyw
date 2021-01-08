@@ -264,9 +264,11 @@ class MainWidget(QWidget):
         elif sys.platform == 'win32':
             subprocess.call(['explorer', save_folder])
 
-if __name__ == "__main__":
+if __name__ == "__main__": # to avoid new window with a new process in multiprocessing
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
     app = QApplication(sys.argv)
+
+    mp.freeze_support() # support multiprocessing in pyinstaller
 
     widget = MainWidget()
     widget.setFixedSize(500, 0)
