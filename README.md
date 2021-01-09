@@ -2,8 +2,10 @@
 
 Made by [**martyr—**](https://martyr.shop) // Logo by [**mönk**](https://www.instagram.com/monkstudeyo/)
 
-### [**Download**](#download-1)
-For Windows and macOS
+## Download
+Version is 1.0 — Released 10 Jan 2021
+
+[Windows](about:blank) | [macOS](about:blank)
 
 [![Instagram Album Cropper](images/instagram_album_cropper.png)](https://martyr.shop)
 
@@ -25,15 +27,6 @@ This tool will definitely simplify your workflow. Try it. It's free.
 - JPG and PNG with transparency compatible.
 - Simple and Fast
 - For Windows and macOS
-
-## Download
-Version is 1.0 — Released 10 Jan 2021
-
-### Windows
-
-### macOS
-
-*In progress*
 
 ## How to Use
 
