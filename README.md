@@ -1,5 +1,13 @@
-# Instagram Album Cropper
-[*Made by martyr—*](https://martyr.shop)
+[![Instagram Album Cropper](images/banner-github.png)](https://martyr.shop)
+
+Made by [**martyr—**](https://martyr.shop) // Logo by [**mönk**](https://www.instagram.com/monkstudeyo/)
+
+## Download
+Version is 1.0 — Released 10 Jan 2021
+
+[Windows](about:blank) | [macOS](about:blank)
+
+[![Instagram Album Cropper](images/instagram_album_cropper.png)](https://martyr.shop)
 
 If you find yourself making carousel albums for Instagram, **you need this.**
 
@@ -11,13 +19,14 @@ This tool will definitely simplify your workflow. Try it. It's free.
 
 ## What it does?
 
+![Instagram Album Cropper](images/instagram_album_cropper.gif)
+
 **It crops an image horizontally in a given width. Just that.**
 - You can customize that width if you want it
 - Height remains the same as the source picture.
-
-## Download
-*In progress*
-
+- JPG and PNG with transparency compatible.
+- Simple and Fast
+- For Windows and macOS
 
 ## How to Use
 
