@@ -146,7 +146,7 @@ class MainWidget(QWidget):
         
         about_button = QPushButton("🔗 Hello!")
         about_button.setMinimumSize(*bottom_button_size)
-        about_button.clicked.connect(lambda: webbrowser.open('https://under.martyr.shop/instagram-album-crop'))
+        about_button.clicked.connect(lambda: webbrowser.open('https://martyr.shop/instagram-album-cropper'))
 
 
         self.crop_button = QPushButton("🔪 Crop")
