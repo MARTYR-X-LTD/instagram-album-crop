@@ -2,7 +2,7 @@
 
 Made by [**martyr—**](https://martyr.shop) // Logo by [**mönk**](https://www.instagram.com/monkstudeyo/)
 
-### [**Download**](#download)
+### [**Download**](#download-1)
 For Windows and macOS
 
 [![Instagram Album Cropper](images/instagram_album_cropper.png)](https://martyr.shop)
