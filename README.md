@@ -5,7 +5,7 @@ Made by [**martyr—**](https://martyr.shop) // Logo by [**mönk**](https://www.
 ## Download
 Version is 1.0 — Released 10 Jan 2021
 
-[Windows](about:blank) | [macOS](about:blank)
+[Windows](https://github.com/MARTYR-X-LTD/instagram-album-crop/releases/download/release-1.0/instagram_album_cropper_1.0_windows.zip) | [macOS](https://github.com/MARTYR-X-LTD/instagram-album-crop/releases/download/release-1.0/instagram_album_cropper_1.0_macos.zip)
 
 [![Instagram Album Cropper](images/instagram_album_cropper.png)](https://martyr.shop)
 
