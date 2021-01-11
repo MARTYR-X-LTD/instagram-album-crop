@@ -47,7 +47,6 @@ class MainWidget(QWidget):
         QWidget.__init__(self)
 
         self.setWindowTitle("Instagram Album Cropper")
-        self.setWindowIcon(QIcon(resource_path('icons/icon.ico')))
 
         # vars
         #self.save_same_folder = tk.IntVar(value=1) # default save in the same folder
@@ -78,6 +77,8 @@ class MainWidget(QWidget):
             slices_entry_width = 32
             spacer_same_folder = (0, 6)
             spacer_bottom = (0, 20)
+        
+            self.setWindowIcon(QIcon(resource_path('icons/icon.ico')))
 
         # Select image layout
         select_image_l = QHBoxLayout()
