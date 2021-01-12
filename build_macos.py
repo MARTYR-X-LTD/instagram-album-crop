@@ -13,7 +13,7 @@ executables = [
 ]
 
 setup(name='Instagram Album Cropper',
-      version = '1.01',
+      version = '1.1',
       description = 'Instagram Album Cropper',
       options = {'build_exe': build_options},
       executables = executables)
