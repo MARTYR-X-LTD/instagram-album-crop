@@ -280,7 +280,10 @@ class MainWidget(QWidget):
 
 if __name__ == "__main__": # to avoid new window with a new process in multiprocessing
     mp.freeze_support() # support multiprocessing in pyinstaller
-    mp.set_start_method('fork') # macos fix for multiple instances in dock
+    if sys.platform == 'darwin':
+        mp.set_start_method('fork') # macos fix for multiple instances in dock
+    else:
+        mp.set_start_method('spawn')
     
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
     app = QApplication(sys.argv)
