@@ -2,7 +2,7 @@
 
 block_cipher = None
 
-a = Analysis(['instagram-crop.pyw'],
+a = Analysis(['instagram_crop.py'],
 	binaries=None,
 	datas=[ ('icons/icon.ico', 'icons/') ],
 	hiddenimports=[],

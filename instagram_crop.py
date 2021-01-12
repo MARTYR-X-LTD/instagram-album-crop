@@ -5,11 +5,11 @@ import subprocess
 import webbrowser
 import threading
 import multiprocessing as mp
-from PySide2.QtWidgets import (QApplication, QLabel, QPushButton, QCheckBox, QSpacerItem, QFormLayout, QVBoxLayout,
+from PyQt5.QtWidgets import (QApplication, QLabel, QPushButton, QCheckBox, QSpacerItem, QFormLayout, QVBoxLayout,
                                QHBoxLayout, QWidget, QLineEdit, QGridLayout, QSizePolicy, QGroupBox, QFileDialog,
                                QMessageBox)
-from PySide2.QtCore import Slot, Qt, Signal, QObject
-from PySide2.QtGui import QIntValidator, QIcon
+from PyQt5.QtCore import Qt, pyqtSignal, QObject
+from PyQt5.QtGui import QIntValidator, QIcon
 
 from PIL import Image
 #os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
@@ -38,14 +38,13 @@ def crop_process(i, im, top, bottom, width_slices, width_im, save_folder, filena
     temp_crop.save(f'{save_folder}{os.sep}{filename}_crop_ig-{str(i+1)}{extension}', quality=100, subsampling=0)
 
 class CropSignals(QObject):
-    crop_started = Signal()
-    crop_finished = Signal()
-    crop_error = Signal()
+    crop_started = pyqtSignal()
+    crop_finished = pyqtSignal()
+    crop_error = pyqtSignal()
 
 class MainWidget(QWidget):
     def __init__(self):
         QWidget.__init__(self)
-
         self.setWindowTitle("Instagram Album Cropper")
 
         # vars
@@ -53,7 +52,6 @@ class MainWidget(QWidget):
         #self.width_slices = 1080 # 1080px is the default max width for slices in Instagram
         self.filename = self.extension = self.file_dir = self.save_folder_custom = None # Initial variables declare
        
-
         # Set main vertical layout for window
         grid = QVBoxLayout()
 
@@ -82,7 +80,6 @@ class MainWidget(QWidget):
 
         # Select image layout
         select_image_l = QHBoxLayout()
-
         select_image_button = QPushButton("🖼 Select Image")
         select_image_button.setMinimumSize(*button_size)
         select_image_button.clicked.connect(self.select_image)
@@ -173,7 +170,7 @@ class MainWidget(QWidget):
         self.setLayout(grid)
 
 
-    @Slot()
+    #@Slot()
     def magic(self):
         self.text.setText(random.choice(self.hello))
 
@@ -283,11 +280,10 @@ class MainWidget(QWidget):
 
 if __name__ == "__main__": # to avoid new window with a new process in multiprocessing
     mp.freeze_support() # support multiprocessing in pyinstaller
-    mp.set_start_method('spawn') # macos fix for multiple instances in dock
+    mp.set_start_method('fork') # macos fix for multiple instances in dock
     
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
     app = QApplication(sys.argv)
-
 
     widget = MainWidget()
 
@@ -295,7 +291,6 @@ if __name__ == "__main__": # to avoid new window with a new process in multiproc
         widget.setFixedSize(600, 0)
     else:
         widget.setFixedSize(540, 0)
-
     widget.show()
 
     sys.exit(app.exec_())
