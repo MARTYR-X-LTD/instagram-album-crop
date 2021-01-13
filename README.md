@@ -3,9 +3,9 @@
 Made by [**martyr—**](https://martyr.shop) // Logo by [**mönk**](https://www.instagram.com/monkstudeyo/)
 
 ## Download
-Version is 1.0 — Released 10 Jan 2021
+v1.1 — Released 13 Jan 2021
 
-[**Windows**](https://github.com/MARTYR-X-LTD/instagram-album-crop/releases/download/release-1.0/instagram_album_cropper_1.0_windows.zip) | [**macOS**](https://github.com/MARTYR-X-LTD/instagram-album-crop/releases/download/release-1.0/instagram_album_cropper_1.0_macos.zip) (**doesn't work on Big Sur.** Waiting for a fix)
+### [**Windows**](https://github.com/MARTYR-X-LTD/instagram-album-crop/releases/download/release-1.1/instagram_album_cropper_1.1_windows.zip) | [**macOS 11.1 Big Sur**](https://github.com/MARTYR-X-LTD/instagram-album-crop/releases/download/release-1.1/instagram_album_cropper_1.1_macos_bigsur.zip) | [**macOS Catalina**](https://github.com/MARTYR-X-LTD/instagram-album-crop/releases/download/release-1.1/instagram_album_cropper_1.0_macos_catalina.zip)
 
 [![Instagram Album Cropper](images/instagram_album_cropper.png)](https://martyr.shop)
 
