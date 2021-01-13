@@ -7,7 +7,7 @@ v1.1 — Released 13 Jan 2021
 
 ### [**Windows**](https://github.com/MARTYR-X-LTD/instagram-album-crop/releases/download/release-1.1/instagram_album_cropper_1.1_windows.zip) | [**macOS 11.1 Big Sur**](https://github.com/MARTYR-X-LTD/instagram-album-crop/releases/download/release-1.1/instagram_album_cropper_1.1_macos_bigsur.zip) | [**macOS Catalina**](https://github.com/MARTYR-X-LTD/instagram-album-crop/releases/download/release-1.1/instagram_album_cropper_1.0_macos_catalina.zip)
 
-[![Instagram Album Cropper](images/instagram_album_cropper.png)](https://martyr.shop)
+[![Instagram Album Cropper](images/instagram_album_cropper.png)](https://martyr.shop/instagram-album-cropper)
 
 If you find yourself making carousel albums for Instagram, **you need this.**
 
